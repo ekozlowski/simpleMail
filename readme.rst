@@ -13,6 +13,17 @@ on Python 2.7.6 on a Mac OS X machine.
 Usage
 =====
 
+.. code:: python
+
+    # plain text
+    send_email(message='testMsg','This is a test... this is only a test.')
+    
+    # HTML
+    send_html_message(message="<h1>Hello HTML world!</h1>")
+
+    # with attachment
+    send_html_message(message="<h1>Check out this awesome Lynx!</h1>", attachments=['./lynx.jpg'])
+
 You should look at simpleMail.py in the source, and set your options at the top there
 accordingly.
 

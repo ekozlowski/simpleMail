@@ -13,6 +13,10 @@ on Python 2.7.6 on a Mac OS X machine.
 Usage
 =====
 
+**WARNING** There is a maxsize parameter which defaults to 100000 characters.  If your message is getting something that looks
+like <Rest of message truncated because of size>, this is why.  Remove at your own risk though... sometimes messages larger
+than this are marked spam, or rejected outright by the SMTP server(s).
+
 .. code:: python
 
     # plain text

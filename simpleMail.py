@@ -88,7 +88,7 @@ def send_html_message(frm=DEFAULT_FROM_ADDRESS,
 
 if __name__ == "__main__":
     # plain text
-    send_email(message='testMsg','This is a test... this is only a test.')
+    send_message(message='testMsg','This is a test... this is only a test.')
     
     # HTML
     send_html_message(message="<h1>Hello HTML world!</h1>")

@@ -36,7 +36,6 @@ ToDo
 Credits
 =======
 
-Randy - My buddy at Alco for the inspiration.
-Pixabay - https://pixabay.com/en/lynx-bobcat-wildlife-predator-1019069/ where I got my 
-AWESOME Lynx picture for my test attachment.
+- Randy - My buddy at Alco for the inspiration.
+- Pixabay - https://pixabay.com/en/lynx-bobcat-wildlife-predator-1019069/ where I got my AWESOME Lynx picture for my test attachment.
 

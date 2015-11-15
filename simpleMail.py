@@ -66,7 +66,7 @@ def send_email(frm, to, subject, message, attachments=None, maxsize=100000, html
 
     server = smtplib.SMTP(SMTP_SERVER) 
     server.starttls()
-    server.login('ekozlowski1@gmail.com', 'wmygmbnuqzhrgtlv')
+    server.login(SMTP_USERNAME, SMTP_PASSWORD)
     errors = server.sendmail(m_from, m_to, msg.as_string())
     return errors
 

@@ -1,19 +1,28 @@
 import mimetypes
 import os
 import smtplib
-from email import MIMEText
-from email import MIMEMultipart
-from email import MIMEBase
-from email import Encoders
+import sys
+
+# If we're using python 3
+if sys.version_info > (3,):
+    from email.mime.text import MIMEText
+    from email.mime.multipart import MIMEMultipart
+    from email.mime.base import MIMEBase
+    from email import encoders
+else:
+    from email.MIMEText import MIMEText
+    from email.MIMEMultipart import MIMEMultipart
+    from email.MIMEBase import MIMEBase
+    from email import Encoders as encoders
 
 SMTP_SERVER = 'smtp.gmail.com:587'  # default to gmail, you can set this to your home-base SMTP server too. :)
-SMTP_USERNAME = '<YOUR GMAIL ADDRESS>' # <-- The Gmail address this message will originate from.
-SMTP_PASSWORD = '<YOUR APP PASSWORD>' # <-- Generate an app password at https://security.google.com/settings/security/apppasswords
-DEFAULT_FROM_ADDRESS = 'me@mydomain.com' # I set this to my gmail address.  You should set it to the email address you use most often.
+SMTP_USERNAME = 'ekozlowski1@gmail.com' # <-- The Gmail address this message will originate from.
+SMTP_PASSWORD = 'qkhemkrmkowxlrlb' # <-- Generate an app password at https://security.google.com/settings/security/apppasswords
+DEFAULT_FROM_ADDRESS = 'ekozlowski1@gmail.com' # I set this to my gmail address.  You should set it to the email address you use most often.
                                          # you can override it on the function call, using the frm parameter.
-DEFAULT_TO_ADDRESS = 'you@yourdomain.com' # again, I set this as my gmail address... because I use this for notifications...
-DEFAULT_SUBJECT = 'Default Email Subject' # just a default - can be whatever.
-DEFAULT_MESSAGE = 'Default Email Message' # just a default - can be whatever.
+DEFAULT_TO_ADDRESS = 'ekozlowski1@gmail.com' # again, I set this as my gmail address... because I use this for notifications...
+DEFAULT_SUBJECT = 'Eds Email Subject!  Woo!' # just a default - can be whatever.
+DEFAULT_MESSAGE = 'Eds Default Email Message' # just a default - can be whatever.
 
 
 def send_email(frm, to, subject, message, attachments=None, maxsize=100000, html=False):
@@ -35,7 +44,7 @@ def send_email(frm, to, subject, message, attachments=None, maxsize=100000, html
     
     m_from = frm
     m_to = to
-    msg = MIMEMultipart.MIMEMultipart()
+    msg = MIMEMultipart()
 
     msg['From'] = m_from
     # if we're passed a string on 'to', don't join with commas.  If we're passed a list,
@@ -46,9 +55,9 @@ def send_email(frm, to, subject, message, attachments=None, maxsize=100000, html
     msg['To'] = m_to
     msg['Subject'] = subject
     if html:
-        body_msg = MIMEText.MIMEText(message, 'html')
+        body_msg = MIMEText(message, 'html')
     else:
-        body_msg = MIMEText.MIMEText(message)
+        body_msg = MIMEText(message)
 
     msg.attach(body_msg)
     # Attach any attachments we have
@@ -57,9 +66,9 @@ def send_email(frm, to, subject, message, attachments=None, maxsize=100000, html
     for attachment in attachments:
         mimetype = mimetypes.guess_type(attachment)[0]
         _maintype, _subtype = mimetype.split('/')
-        att = MIMEBase.MIMEBase(_maintype, _subtype)
+        att = MIMEBase(_maintype, _subtype)
         att.set_payload(open(attachment, 'rb').read())
-        Encoders.encode_base64(att)
+        encoders.encode_base64(att)
         file_name=os.path.basename(attachment)
         att.add_header('Content-Disposition', 'attachment', filename=file_name)
         msg.attach(att)
@@ -88,7 +97,7 @@ def send_html_message(frm=DEFAULT_FROM_ADDRESS,
 
 if __name__ == "__main__":
     # plain text
-    send_message(message='testMsg','This is a test... this is only a test.')
+    send_message(message='This is a test... this is only a test.')
     
     # HTML
     send_html_message(message="<h1>Hello HTML world!</h1>")

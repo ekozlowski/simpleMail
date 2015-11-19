@@ -20,7 +20,7 @@ than this are marked spam, or rejected outright by the SMTP server(s).
 .. code:: python
 
     # plain text
-    send_email(message='testMsg','This is a test... this is only a test.')
+    send_message(message='This is a test... this is only a test.')
     
     # HTML
     send_html_message(message="<h1>Hello HTML world!</h1>")

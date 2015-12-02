@@ -16,13 +16,13 @@ else:
     from email import Encoders as encoders
 
 SMTP_SERVER = 'smtp.gmail.com:587'  # default to gmail, you can set this to your home-base SMTP server too. :)
-SMTP_USERNAME = 'ekozlowski1@gmail.com' # <-- The Gmail address this message will originate from.
-SMTP_PASSWORD = 'qkhemkrmkowxlrlb' # <-- Generate an app password at https://security.google.com/settings/security/apppasswords
-DEFAULT_FROM_ADDRESS = 'ekozlowski1@gmail.com' # I set this to my gmail address.  You should set it to the email address you use most often.
+SMTP_USERNAME = 'YOUR_SMTP_USERNAME' # <-- The Gmail address this message will originate from.
+SMTP_PASSWORD = 'YOUR_SMTP_PASSWORD' # <-- Generate an app password at https://security.google.com/settings/security/apppasswords
+DEFAULT_FROM_ADDRESS = 'DEFAULT_FROM_ADDRESS' # I set this to my gmail address.  You should set it to the email address you use most often.
                                          # you can override it on the function call, using the frm parameter.
-DEFAULT_TO_ADDRESS = 'ekozlowski1@gmail.com' # again, I set this as my gmail address... because I use this for notifications...
-DEFAULT_SUBJECT = 'Eds Email Subject!  Woo!' # just a default - can be whatever.
-DEFAULT_MESSAGE = 'Eds Default Email Message' # just a default - can be whatever.
+DEFAULT_TO_ADDRESS = 'DEFAULT_TO_ADDRESS' # again, I set this as my gmail address... because I use this for notifications...
+DEFAULT_SUBJECT = 'Default Email Subject!  Woo!' # just a default - can be whatever.
+DEFAULT_MESSAGE = 'Default Email Message' # just a default - can be whatever.
 
 
 def send_email(frm, to, subject, message, attachments=None, maxsize=100000, html=False):

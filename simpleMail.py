@@ -71,11 +71,11 @@ def send_email(frm, to, subject, message, attachments=None, maxsize=100000, html
             att.set_payload(open(attachment, 'rb').read())
         except OSError as err:
             att = MIMEText('OS Error: {}'.format(err))
-            msg.attach(att)
         else:
             encoders.encode_base64(att)
             file_name=os.path.basename(attachment)
             att.add_header('Content-Disposition', 'attachment', filename=file_name)
+        finally:
             msg.attach(att)
 
     server = smtplib.SMTP(SMTP_SERVER) 

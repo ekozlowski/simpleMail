@@ -70,7 +70,8 @@ def send_email(frm, to, subject, message, attachments=None, maxsize=100000, html
         try:
             att.set_payload(open(attachment, 'rb').read())
         except OSError as err:
-            print('OS Error: {}'.format(err))
+            att = MIMEText('OS Error: {}'.format(err))
+            msg.attach(att)
         else:
             encoders.encode_base64(att)
             file_name=os.path.basename(attachment)

@@ -49,7 +49,7 @@ def send_email(frm, to, subject, message, attachments=None, maxsize=100000, html
     msg['From'] = m_from
     # if we're passed a string on 'to', don't join with commas.  If we're passed a list,
     # we'll need to join the adddresses with commas.
-    if not hasattr(m_to, 'upper'):
+    if isinstance(m_to, list):
         m_to = ','.join(m_to)
 
     msg['To'] = m_to
@@ -67,11 +67,16 @@ def send_email(frm, to, subject, message, attachments=None, maxsize=100000, html
         mimetype = mimetypes.guess_type(attachment)[0]
         _maintype, _subtype = mimetype.split('/')
         att = MIMEBase(_maintype, _subtype)
-        att.set_payload(open(attachment, 'rb').read())
-        encoders.encode_base64(att)
-        file_name=os.path.basename(attachment)
-        att.add_header('Content-Disposition', 'attachment', filename=file_name)
-        msg.attach(att)
+        try:
+            att.set_payload(open(attachment, 'rb').read())
+        except OSError as err:
+            att = MIMEText('OS Error: {}'.format(err))
+        else:
+            encoders.encode_base64(att)
+            file_name=os.path.basename(attachment)
+            att.add_header('Content-Disposition', 'attachment', filename=file_name)
+        finally:
+            msg.attach(att)
 
     server = smtplib.SMTP(SMTP_SERVER) 
     server.starttls()
